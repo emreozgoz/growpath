@@ -130,47 +130,17 @@ class AIService {
    * Build optimized prompt for AI
    */
   private buildPrompt(input: LearningPathInput): string {
-    return `Create a personalized ${input.durationWeeks}-week learning plan for ${input.skill}.
+    const minutesPerDay = Math.round((input.hoursPerWeek / input.daysPerWeek) * 60)
+    return `Create ${input.durationWeeks}-week ${input.skill} learning plan.
 
-Student Profile:
-- Current Level: ${input.currentLevel}
-- Weekly Commitment: ${input.hoursPerWeek} hours across ${input.daysPerWeek} days
-- Goals: ${input.goals.join(', ')}
+Level: ${input.currentLevel}
+Schedule: ${input.hoursPerWeek}h/week, ${input.daysPerWeek} days (${minutesPerDay}min/day)
+Goals: ${input.goals.join(', ')}
 
-Requirements:
-1. Break down into ${input.durationWeeks} weeks with clear weekly objectives
-2. Distribute tasks across ${input.daysPerWeek} days per week
-3. Each day should have ${Math.round((input.hoursPerWeek / input.daysPerWeek) * 60)} minutes of content
-4. Include variety: readings, practice exercises, projects, videos, quizzes
-5. Progress from fundamentals to advanced topics
-6. Align with stated goals
+JSON output:
+{"skill":"${input.skill}","weeks":[{"weekNumber":1,"title":"","description":"","days":[{"dayNumber":1,"tasks":[{"id":"w1d1t1","title":"","description":"","estimatedMinutes":${minutesPerDay},"type":"reading|practice|project|video|quiz"}]}]}],"estimatedCompletionDate":"YYYY-MM-DD"}
 
-Output JSON format:
-{
-  "skill": "string",
-  "weeks": [
-    {
-      "weekNumber": 1,
-      "title": "Week title",
-      "description": "What will be learned",
-      "days": [
-        {
-          "dayNumber": 1,
-          "tasks": [
-            {
-              "id": "unique-id",
-              "title": "Task title",
-              "description": "What to do",
-              "estimatedMinutes": 30,
-              "type": "reading|practice|project|video|quiz"
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "estimatedCompletionDate": "YYYY-MM-DD"
-}`
+Include variety (reading/practice/project/video/quiz), progress fundamentals→advanced, align with goals.`
   }
 
   /**

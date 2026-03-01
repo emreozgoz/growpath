@@ -53,6 +53,8 @@ model LearningPath {
   @@index([userId])
   @@index([status])
   @@index([createdAt])
+  @@index([userId, status])
+  @@index([userId, createdAt(sort: Desc)])
   @@map("learning_paths")
 }
 
