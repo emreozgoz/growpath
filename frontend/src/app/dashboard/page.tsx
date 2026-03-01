@@ -76,7 +76,11 @@ export default function DashboardPage() {
             <CardContent>
               <div className="text-center py-8">
                 <p className="text-gray-500 mb-4">No learning paths yet</p>
-                <Button variant="primary" size="sm">
+                <Button
+                  variant="primary"
+                  size="sm"
+                  onClick={() => router.push('/onboarding')}
+                >
                   Create Your First Path
                 </Button>
               </div>
@@ -120,7 +124,12 @@ export default function DashboardPage() {
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
-                <Button variant="outline" className="w-full justify-start" size="sm">
+                <Button
+                  variant="outline"
+                  className="w-full justify-start"
+                  size="sm"
+                  onClick={() => router.push('/onboarding')}
+                >
                   📝 Start Onboarding
                 </Button>
                 <Button variant="outline" className="w-full justify-start" size="sm">
@@ -144,7 +153,11 @@ export default function DashboardPage() {
               <p className="text-primary-700 mb-3">
                 Start your personalized learning journey today. Our AI will create a custom study plan tailored to your goals and schedule.
               </p>
-              <Button variant="primary" size="sm">
+              <Button
+                variant="primary"
+                size="sm"
+                onClick={() => router.push('/onboarding')}
+              >
                 Create Your Learning Path →
               </Button>
             </div>

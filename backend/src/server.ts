@@ -6,6 +6,7 @@ import dotenv from 'dotenv'
 import { errorHandler } from './middleware/error.middleware'
 import { logger } from './utils/logger'
 import authRoutes from './routes/auth.routes'
+import learningPathRoutes from './routes/learning-path.routes'
 
 // Load environment variables
 dotenv.config({ path: '../.env' })
@@ -21,7 +22,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // Health check endpoint
-app.get('/api/v1/health', (req, res) => {
+app.get('/api/v1/health', (_req, res) => {
   res.json({
     success: true,
     message: 'GrowPath API is running',
@@ -32,8 +33,8 @@ app.get('/api/v1/health', (req, res) => {
 
 // Routes
 app.use('/api/v1/auth', authRoutes)
+app.use('/api/v1/learning-paths', learningPathRoutes)
 // app.use('/api/v1/users', userRoutes)
-// app.use('/api/v1/learning-paths', learningPathRoutes)
 
 // Error handling middleware (must be last)
 app.use(errorHandler)

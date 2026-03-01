@@ -69,7 +69,7 @@ router.post('/signup', async (req, res, next) => {
     })
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return res.status(400).json({
+      res.status(400).json({
         success: false,
         error: {
           code: 'VALIDATION_ERROR',
@@ -77,6 +77,7 @@ router.post('/signup', async (req, res, next) => {
           details: error.errors,
         },
       })
+      return
     }
     next(error)
   }
@@ -131,7 +132,7 @@ router.post('/login', async (req, res, next) => {
     })
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return res.status(400).json({
+      res.status(400).json({
         success: false,
         error: {
           code: 'VALIDATION_ERROR',
@@ -139,6 +140,7 @@ router.post('/login', async (req, res, next) => {
           details: error.errors,
         },
       })
+      return
     }
     next(error)
   }
@@ -148,7 +150,7 @@ router.post('/login', async (req, res, next) => {
  * GET /api/v1/auth/me
  * Get current user (requires session)
  */
-router.get('/me', async (req, res, next) => {
+router.get('/me', async (_req, res, next) => {
   try {
     // TODO: Extract user ID from session/JWT
     // For now, this is a placeholder
