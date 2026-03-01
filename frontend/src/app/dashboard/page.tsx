@@ -74,7 +74,7 @@ export default function DashboardPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="text-2xl">🌱</div>
+              <span aria-hidden="true" className="text-2xl">🌱</span>
               <h1 className="text-xl font-heading font-semibold text-gray-900">
                 GrowPath
               </h1>
@@ -99,12 +99,12 @@ export default function DashboardPage() {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <Card>
             <CardHeader>
-              <CardTitle>🎯 Learning Paths</CardTitle>
+              <CardTitle><span aria-hidden="true">🎯</span> Learning Paths</CardTitle>
               <CardDescription>Your active learning journeys</CardDescription>
             </CardHeader>
             <CardContent>
               {isLoadingPaths ? (
-                <div className="text-center py-8">
+                <div className="text-center py-8" role="status" aria-label="Loading learning paths">
                   <div className="animate-spin rounded-full h-8 w-8 border-4 border-primary-500 border-t-transparent mx-auto mb-2"></div>
                   <p className="text-sm text-gray-500">Loading paths...</p>
                 </div>
@@ -165,7 +165,7 @@ export default function DashboardPage() {
 
           <Card>
             <CardHeader>
-              <CardTitle>📊 Progress</CardTitle>
+              <CardTitle><span aria-hidden="true">📊</span> Progress</CardTitle>
               <CardDescription>Your learning statistics</CardDescription>
             </CardHeader>
             <CardContent>
@@ -195,7 +195,7 @@ export default function DashboardPage() {
 
           <Card>
             <CardHeader>
-              <CardTitle>🚀 Quick Actions</CardTitle>
+              <CardTitle><span aria-hidden="true">🚀</span> Quick Actions</CardTitle>
               <CardDescription>Get started quickly</CardDescription>
             </CardHeader>
             <CardContent>
@@ -221,7 +221,7 @@ export default function DashboardPage() {
 
         <div className="mt-8 p-6 bg-primary-50 border border-primary-200 rounded-lg">
           <div className="flex items-start space-x-4">
-            <div className="text-3xl">🎉</div>
+            <span aria-hidden="true" className="text-3xl">🎉</span>
             <div className="flex-1">
               <h3 className="text-lg font-semibold text-primary-900 mb-1">
                 Welcome to GrowPath!

@@ -99,7 +99,7 @@ export default function SignupPage() {
     <Card>
       <CardHeader className="space-y-1">
         <div className="flex justify-center mb-4">
-          <div className="text-4xl">🌱</div>
+          <span aria-hidden="true" className="text-4xl">🌱</span>
         </div>
         <CardTitle className="text-2xl text-center">Create an account</CardTitle>
         <CardDescription className="text-center">
