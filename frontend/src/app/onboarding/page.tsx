@@ -1,12 +1,27 @@
 'use client'
 
+import dynamic from 'next/dynamic'
 import { useOnboardingStore } from '@/store/onboarding.store'
-import { Step1Skill } from '@/components/onboarding/Step1Skill'
-import { Step2Level } from '@/components/onboarding/Step2Level'
-import { Step3Time } from '@/components/onboarding/Step3Time'
-import { Step4Goals } from '@/components/onboarding/Step4Goals'
-import { Step5Review } from '@/components/onboarding/Step5Review'
-import { Step6Generate } from '@/components/onboarding/Step6Generate'
+
+// Lazy load step components - only load the current step
+const Step1Skill = dynamic(() => import('@/components/onboarding/Step1Skill').then(mod => ({ default: mod.Step1Skill })), {
+  loading: () => <div className="text-center py-8">Loading...</div>
+})
+const Step2Level = dynamic(() => import('@/components/onboarding/Step2Level').then(mod => ({ default: mod.Step2Level })), {
+  loading: () => <div className="text-center py-8">Loading...</div>
+})
+const Step3Time = dynamic(() => import('@/components/onboarding/Step3Time').then(mod => ({ default: mod.Step3Time })), {
+  loading: () => <div className="text-center py-8">Loading...</div>
+})
+const Step4Goals = dynamic(() => import('@/components/onboarding/Step4Goals').then(mod => ({ default: mod.Step4Goals })), {
+  loading: () => <div className="text-center py-8">Loading...</div>
+})
+const Step5Review = dynamic(() => import('@/components/onboarding/Step5Review').then(mod => ({ default: mod.Step5Review })), {
+  loading: () => <div className="text-center py-8">Loading...</div>
+})
+const Step6Generate = dynamic(() => import('@/components/onboarding/Step6Generate').then(mod => ({ default: mod.Step6Generate })), {
+  loading: () => <div className="text-center py-8">Loading...</div>
+})
 
 const STEPS = [
   { number: 1, title: 'Choose Skill', component: Step1Skill },
