@@ -2,9 +2,11 @@
 
 > Transform your learning journey with AI-generated personalized study plans tailored to your schedule and goals.
 
+[![CI](https://github.com/emreozgoz/growpath/actions/workflows/ci.yml/badge.svg)](https://github.com/emreozgoz/growpath/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Next.js](https://img.shields.io/badge/Next.js-14-black)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
+[![WCAG 2.1 AA](https://img.shields.io/badge/Accessibility-WCAG%202.1%20AA-green)](https://www.w3.org/WAI/WCAG21/quickref/)
 
 ## 🎯 Vision
 
@@ -131,26 +133,30 @@ npm run dev
 - ✅ OpenAI API integration
 
 ### Sprint 2: Core Features (Weeks 3-4)
-- 🔄 6-step onboarding stepper
-- 🔄 AI learning path generation
-- 🔄 User dashboard & progress tracking
-- 🔄 Pricing tiers & Stripe integration
-- 🔄 Redis caching layer
+- ✅ 6-step onboarding stepper
+- ✅ AI learning path generation
+- ✅ User dashboard & progress tracking
+- ✅ Pricing tiers & Stripe integration
+- ✅ Redis caching layer
 
 ### Sprint 3: Polish & Launch (Weeks 5-6)
-- ⏳ Performance optimization
-- ⏳ E2E testing & QA
-- ⏳ Documentation completion
-- ⏳ Production deployment
-- ⏳ Launch preparation
+- ✅ Performance optimization (Day 1-2)
+- ✅ E2E testing & QA (Day 3-4)
+- ✅ Security & Accessibility audit (Day 4)
+- ✅ CI/CD pipeline (Day 5)
+- ⏳ Production deployment (Day 6-7)
+- ⏳ Monitoring & Documentation (Day 8-9)
+- ⏳ Launch preparation (Day 10)
 
-## 🧪 Testing Strategy
+## 🧪 Testing & Quality
 
 - **Unit Tests**: Vitest (>80% coverage target)
 - **Integration Tests**: React Testing Library
-- **E2E Tests**: Playwright (Critical user flows)
+- **E2E Tests**: Playwright (7 test cases - auth & onboarding flows)
 - **Performance**: Lighthouse CI (>90 score)
-- **Security**: OWASP ZAP, Dependency scanning
+- **Security**: OWASP Top 10 (84/100 B+ grade), npm audit
+- **Accessibility**: WCAG 2.1 AA (100% compliance)
+- **CI/CD**: GitHub Actions (automated testing on every push/PR)
 
 ## 🤝 Contributing
 
