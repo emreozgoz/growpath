@@ -12,9 +12,21 @@ interface User {
   tier: string
 }
 
+interface LearningPath {
+  id: string
+  skill: string
+  currentLevel: string
+  durationWeeks: number
+  status: string
+  createdAt: string
+  aiModel: string
+}
+
 export default function DashboardPage() {
   const router = useRouter()
   const [user, setUser] = useState<User | null>(null)
+  const [learningPaths, setLearningPaths] = useState<LearningPath[]>([])
+  const [isLoadingPaths, setIsLoadingPaths] = useState(true)
 
   useEffect(() => {
     // Check if user is logged in (temporary - will use NextAuth session)
@@ -23,8 +35,25 @@ export default function DashboardPage() {
       router.push('/login')
       return
     }
-    setUser(JSON.parse(userData))
+    const parsedUser = JSON.parse(userData)
+    setUser(parsedUser)
+    fetchLearningPaths(parsedUser.id)
   }, [router])
+
+  const fetchLearningPaths = async (userId: string) => {
+    try {
+      const response = await fetch(`http://localhost:3001/api/v1/learning-paths?userId=${userId}`)
+      const data = await response.json()
+
+      if (response.ok) {
+        setLearningPaths(data.data.paths || [])
+      }
+    } catch (err) {
+      console.error('Failed to fetch learning paths:', err)
+    } finally {
+      setIsLoadingPaths(false)
+    }
+  }
 
   const handleLogout = () => {
     localStorage.removeItem('user')
@@ -74,16 +103,63 @@ export default function DashboardPage() {
               <CardDescription>Your active learning journeys</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="text-center py-8">
-                <p className="text-gray-500 mb-4">No learning paths yet</p>
-                <Button
-                  variant="primary"
-                  size="sm"
-                  onClick={() => router.push('/onboarding')}
-                >
-                  Create Your First Path
-                </Button>
-              </div>
+              {isLoadingPaths ? (
+                <div className="text-center py-8">
+                  <div className="animate-spin rounded-full h-8 w-8 border-4 border-primary-500 border-t-transparent mx-auto mb-2"></div>
+                  <p className="text-sm text-gray-500">Loading paths...</p>
+                </div>
+              ) : learningPaths.length === 0 ? (
+                <div className="text-center py-8">
+                  <p className="text-gray-500 mb-4">No learning paths yet</p>
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    onClick={() => router.push('/onboarding')}
+                  >
+                    Create Your First Path
+                  </Button>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {learningPaths.map((path) => (
+                    <button
+                      key={path.id}
+                      onClick={() => router.push(`/learning-paths/${path.id}`)}
+                      className="w-full text-left p-4 rounded-lg border-2 border-gray-200 hover:border-primary-500 hover:bg-primary-50 transition-all"
+                    >
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <h4 className="font-semibold text-gray-900">{path.skill}</h4>
+                          <p className="text-sm text-gray-600 mt-1">
+                            {path.currentLevel} • {path.durationWeeks} weeks
+                          </p>
+                        </div>
+                        <div className="ml-4">
+                          <span
+                            className={`px-2 py-1 text-xs font-medium rounded ${
+                              path.status === 'ACTIVE'
+                                ? 'bg-primary-100 text-primary-700'
+                                : path.status === 'COMPLETED'
+                                ? 'bg-green-100 text-green-700'
+                                : 'bg-gray-100 text-gray-700'
+                            }`}
+                          >
+                            {path.status}
+                          </span>
+                        </div>
+                      </div>
+                    </button>
+                  ))}
+                  <Button
+                    variant="outline"
+                    className="w-full"
+                    size="sm"
+                    onClick={() => router.push('/onboarding')}
+                  >
+                    + Create New Path
+                  </Button>
+                </div>
+              )}
             </CardContent>
           </Card>
 

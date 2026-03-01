@@ -260,4 +260,73 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
+/**
+ * PUT /api/v1/learning-paths/:id/progress
+ * Update task completion status
+ */
+router.put('/:id/progress', async (req, res, next) => {
+  try {
+    const { id } = req.params
+    const { taskId, completed, week, day } = req.body
+
+    if (!taskId || typeof completed !== 'boolean') {
+      throw new AppError('taskId and completed status required', 400)
+    }
+
+    // Find the progress record
+    const progressRecord = await prisma.learningProgress.findFirst({
+      where: {
+        learningPathId: id,
+        taskId,
+      },
+    })
+
+    if (!progressRecord) {
+      throw new AppError('Progress record not found', 404)
+    }
+
+    // Update progress
+    const updated = await prisma.learningProgress.update({
+      where: { id: progressRecord.id },
+      data: {
+        completed,
+        completedAt: completed ? new Date() : null,
+      },
+    })
+
+    // Get updated progress summary
+    const allProgress = await prisma.learningProgress.findMany({
+      where: { learningPathId: id },
+    })
+
+    const totalTasks = allProgress.length
+    const completedTasks = allProgress.filter((p) => p.completed).length
+    const percentage = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0
+
+    // Update learning path status if completed
+    if (percentage === 100) {
+      await prisma.learningPath.update({
+        where: { id },
+        data: { status: 'COMPLETED' },
+      })
+    }
+
+    logger.info(`Progress updated: ${id} - Task ${taskId} - ${completed ? 'completed' : 'uncompleted'}`)
+
+    res.json({
+      success: true,
+      data: {
+        progress: updated,
+        summary: {
+          totalTasks,
+          completedTasks,
+          percentage,
+        },
+      },
+    })
+  } catch (error) {
+    next(error)
+  }
+})
+
 export default router
