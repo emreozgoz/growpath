@@ -1,0 +1,121 @@
+# GrowPath - Git Ignore
+
+# ============================================
+# Dependencies
+# ============================================
+node_modules/
+.pnp
+.pnp.js
+
+# ============================================
+# Environment Variables
+# ============================================
+.env
+.env*.local
+.env.production
+
+# ============================================
+# Next.js
+# ============================================
+.next/
+out/
+build/
+dist/
+
+# Production build
+*.production.js
+*.production.json
+
+# ============================================
+# Testing
+# ============================================
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+*.lcov
+
+# ============================================
+# Logs
+# ============================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ============================================
+# OS Files
+# ============================================
+.DS_Store
+*.swp
+*.swo
+*~
+Thumbs.db
+Desktop.ini
+
+# ============================================
+# IDEs and Editors
+# ============================================
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.iml
+
+# ============================================
+# Prisma
+# ============================================
+*.db
+*.db-journal
+migrations/*.sql
+!migrations/*_init/
+
+# ============================================
+# Cache
+# ============================================
+.cache/
+.parcel-cache/
+.turbo/
+.eslintcache
+
+# ============================================
+# Vercel
+# ============================================
+.vercel
+
+# ============================================
+# TypeScript
+# ============================================
+*.tsbuildinfo
+next-env.d.ts
+
+# ============================================
+# Temporary Files
+# ============================================
+tmp/
+temp/
+*.tmp
+
+# ============================================
+# Sentry
+# ============================================
+.sentryclirc
+sentry.properties
+
+# ============================================
+# Miscellaneous
+# ============================================
+*.pem
+.npm
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz

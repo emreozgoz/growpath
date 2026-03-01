@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Ask a Question
+    url: https://github.com/emreozgoz/growpath/discussions
+    about: Ask questions and discuss ideas with the community
+  - name: 📚 Documentation
+    url: https://github.com/emreozgoz/growpath/blob/main/README.md
+    about: Read the official GrowPath documentation
+  - name: 🆘 Get Support
+    url: https://github.com/emreozgoz/growpath/discussions/categories/support
+    about: Get help with using GrowPath
