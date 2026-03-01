@@ -5,6 +5,7 @@ import morgan from 'morgan'
 import dotenv from 'dotenv'
 import { errorHandler } from './middleware/error.middleware'
 import { logger } from './utils/logger'
+import authRoutes from './routes/auth.routes'
 
 // Load environment variables
 dotenv.config({ path: '../.env' })
@@ -29,8 +30,8 @@ app.get('/api/v1/health', (req, res) => {
   })
 })
 
-// Routes will be added here
-// app.use('/api/v1/auth', authRoutes)
+// Routes
+app.use('/api/v1/auth', authRoutes)
 // app.use('/api/v1/users', userRoutes)
 // app.use('/api/v1/learning-paths', learningPathRoutes)
 
